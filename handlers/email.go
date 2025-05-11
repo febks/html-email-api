@@ -16,7 +16,7 @@ func SendEmailHandler(c *gin.Context) {
 		return
 	}
 
-	if err := services.SendEmail(req.To, req.Cc, req.Subject, req.Body); err != nil {
+	if err := services.SendEmail(req.To, req.Cc, req.Bcc, req.Subject, req.Body); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to send email"})
 		return
 	}

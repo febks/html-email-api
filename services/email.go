@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func SendEmail(to []string, cc []string, subject, htmlBody string) error {
+func SendEmail(to []string, cc []string, bcc []string, subject, htmlBody string) error {
 	smtpHost := "smtp.gmail.com"
 	smtpPort := "587"
 
@@ -22,6 +22,9 @@ func SendEmail(to []string, cc []string, subject, htmlBody string) error {
 	headers["To"] = strings.Join(to, ",")
 	if len(cc) > 0 {
 		headers["Cc"] = strings.Join(cc, ",")
+	}
+	if len(bcc) > 0 {
+		headers["Bcc"] = strings.Join(bcc, ",")
 	}
 	headers["Subject"] = subject
 	headers["MIME-Version"] = "1.0"
@@ -38,6 +41,7 @@ func SendEmail(to []string, cc []string, subject, htmlBody string) error {
 	smtpAddr := fmt.Sprintf("%s:%s", smtpHost, smtpPort)
 
 	allRecipients := append(to, cc...)
+	allRecipients = append(allRecipients, bcc...)
 
 	err := smtp.SendMail(smtpAddr, auth, authEmail, allRecipients, []byte(msg.String()))
 	if err != nil {
