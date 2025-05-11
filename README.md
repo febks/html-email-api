@@ -1,4 +1,3 @@
-```markdown
 ## How to Use in Postman
 
 To test the email-sending functionality using Postman, follow these steps:
@@ -25,5 +24,4 @@ To test the email-sending functionality using Postman, follow these steps:
 {
   "message": "Email sent successfully."
 }
-```
 ```
